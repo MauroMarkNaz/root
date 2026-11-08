@@ -1,0 +1,35 @@
+# STAGED REFERENCE — NOT ACTIVE. Reference for local CodeQL runs.
+# Do NOT copy into .github/workflows/ without Mauro's explicit,
+# per-item order, human-paced, days apart (ghost-host doctrine —
+# see ENABLEMENTS.md). Manual dispatch only, by design.
+name: "CodeQL (staged reference)"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Adjust to languages actually present before any activation.
+        language: ["javascript-typescript", "python"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # UNVERIFIED pin — GitHub API rate limit hit 2026-11-08; verify before any activation
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4 # UNVERIFIED pin — see ENABLEMENTS.md version table
+        with:
+          languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v4 # UNVERIFIED pin
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4 # UNVERIFIED pin
+        with:
+          category: "/language:${{ matrix.language }}"

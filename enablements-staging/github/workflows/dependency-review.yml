@@ -1,0 +1,26 @@
+# STAGED REFERENCE — NOT ACTIVE. Reference for local dependency
+# review. Do NOT copy into .github/workflows/ without Mauro's
+# explicit, per-item order (ghost-host doctrine — see
+# ENABLEMENTS.md). Manual dispatch only, by design.
+# NOTE: dependency-review normally runs on pull_request; kept
+# manual-only here under the ghost-host doctrine, so treat this as
+# a reference copy, not a drop-in automation plan.
+name: "Dependency Review (staged reference)"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # UNVERIFIED pin — GitHub API rate limit hit 2026-11-08; verify before any activation
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v5 # VERIFIED: latest tag v5.0.0 seen via tags API 2026-11-08
+        with:
+          fail-on-severity: high

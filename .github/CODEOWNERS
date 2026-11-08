@@ -1,0 +1,7 @@
+# Default owner for everything in this repo.
+* @faggpt
+
+# Security-sensitive surfaces get the same owner explicitly,
+# so ownership is visible in reviews even if defaults change.
+/enablements-staging/ @faggpt
+/SECURITY.md @faggpt

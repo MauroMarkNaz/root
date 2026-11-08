@@ -1,0 +1,27 @@
+# STAGED REFERENCE — NOT ACTIVE. Reference for local Semgrep runs
+# (`semgrep scan` with the VM-installed semgrep — see VM-TOOLS.md).
+# Do NOT copy into .github/workflows/ without Mauro's explicit,
+# per-item order (ghost-host doctrine — see ENABLEMENTS.md).
+# Manual dispatch only, by design.
+name: "Semgrep (staged reference)"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  semgrep:
+    name: Semgrep scan
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # UNVERIFIED pin — GitHub API rate limit hit 2026-11-08; verify before any activation
+      - name: Run Semgrep (action form)
+        uses: semgrep/semgrep-action@v1 # VERIFIED: releases/latest = v1 on 2026-11-08
+        with:
+          config: p/default

@@ -1,0 +1,21 @@
+# Local-only pre-commit hooks. These run on the VM with locally
+# installed tools (see VM-TOOLS.md) — nothing here fires on GitHub.
+# Install once:  pre-commit install
+repos:
+  - repo: local
+    hooks:
+      - id: shellcheck
+        name: shellcheck
+        entry: shellcheck
+        language: system
+        types: [shell]
+      - id: actionlint
+        name: actionlint (staged workflows too)
+        entry: actionlint
+        language: system
+        files: ^(enablements-staging/github/workflows/|\.github/workflows/)
+      - id: gitleaks
+        name: gitleaks (protect staged commits)
+        entry: gitleaks protect --staged --no-banner
+        language: system
+        pass_filenames: false

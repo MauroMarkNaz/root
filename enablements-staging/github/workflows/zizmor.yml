@@ -1,0 +1,24 @@
+# STAGED REFERENCE — NOT ACTIVE. Reference for local zizmor runs
+# (`zizmor .github/workflows/` with the VM-installed zizmor — see
+# VM-TOOLS.md). Do NOT copy into .github/workflows/ without
+# Mauro's explicit, per-item order (ghost-host doctrine — see
+# ENABLEMENTS.md). Manual dispatch only, by design.
+name: "zizmor — workflow security (staged reference)"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  zizmor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # UNVERIFIED pin — GitHub API rate limit hit 2026-11-08; verify before any activation
+        with:
+          persist-credentials: false
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@v0 # UNVERIFIED pin — verify current version before any activation
