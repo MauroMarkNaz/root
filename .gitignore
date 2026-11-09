@@ -1,60 +1,29 @@
-# --- Secrets / env (never commit) ---
-.env
-.env.*
-!.env.example
-*.pem
-*.key
-id_rsa*
-id_ed25519*
-credentials*
-*secret*
-!enablements-staging/github/workflows/secret-scan.yml
-.secrets/
+# Local development artifacts
 
-# --- Python ---
-__pycache__/
-*.py[cod]
-*.egg-info/
-.venv/
-venv/
-dist/
-build/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# --- Node ---
-node_modules/
-npm-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-.next/
-out/
-
-# --- Go ---
-/bin/
-*.test
-*.out
-go.work.sum
-
-# --- Rust ---
-/target/
-Cargo.lock.bak
-**/*.rs.bk
-
-# --- Docker / general build ---
-*.tar
-.cache/
-
-# --- Editors / OS ---
-.vscode/
-.idea/
-*.swp
-*~
 .DS_Store
 Thumbs.db
 
-# --- Logs / tmp ---
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+
+# Node
+node_modules/
+.npm/
+.next/
+
+# Logs
 *.log
-/tmp/
-tmp/
+
+# Editor settings
+.vscode/
+.idea/
+
+# OS files
+*.swp
+*.swo
